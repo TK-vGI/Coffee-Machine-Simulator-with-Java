@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class CoffeeMachine {
+    public static void main(String[] args) {
+        final int water = 200;
+        final int milk = 50;
+        final int beans = 15;
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write how many ml of water the coffee machine has:");
+        int waterIn= scanner.nextInt();
+        System.out.println("Write how many ml of milk the coffee machine has:");
+        int milkIn= scanner.nextInt();
+        System.out.println("Write how many grams of coffee beans the coffee machine has:");
+        int beansIn= scanner.nextInt();
+        System.out.println("Write how many cups of coffee you will need:");
+        int cups= scanner.nextInt();
+
+        int minPossible = Math.min(waterIn / water,Math.min(milkIn / milk,beansIn / beans));
+
+        if (minPossible == cups) {
+            System.out.println("Yes, I can make that amount of coffee");
+        } else if (minPossible > cups) {
+            int moreCups = minPossible - cups;
+            System.out.printf("Yes, I can make that amount of coffee (and even %d more than that)", moreCups);
+            System.out.println();
+        } else {
+            do {
+                cups -= 1;
+            } while (minPossible < cups);
+            System.out.printf("No, I can make only %d cup(s) of coffee%n", cups);
+            System.out.println();
+        }
+        scanner.close();
+    }
+}

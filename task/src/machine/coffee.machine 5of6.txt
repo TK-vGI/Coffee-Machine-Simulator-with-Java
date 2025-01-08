@@ -1,0 +1,177 @@
+package machine;
+
+import java.util.Scanner;
+
+public class CoffeeMachine {
+    int water, milk, beans;
+    int dispoCups;
+    int money;
+
+    public CoffeeMachine(int water, int milk, int beans, int dispoCups, int money) {
+        this.water = water;
+        this.milk = milk;
+        this.beans = beans;
+        this.dispoCups = dispoCups;
+        this.money = money;
+    }
+
+    public int getWater() {
+        return water;
+    }
+
+    public void setWater(int water) {
+        this.water = water;
+    }
+
+    public int getMilk() {
+        return milk;
+    }
+
+    public void setMilk(int milk) {
+        this.milk = milk;
+    }
+
+    public int getBeans() {
+        return beans;
+    }
+
+    public void setBeans(int beans) {
+        this.beans = beans;
+    }
+
+    public int getDispoCups() {
+        return dispoCups;
+    }
+
+    public void setDispoCups(int dispoCups) {
+        this.dispoCups = dispoCups;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void coffeeMachineActual() {
+        System.out.println();
+        System.out.printf("The coffee machine has:%n" +
+                "%d ml of water%n" +
+                "%d ml of milk%n" +
+                "%d g of coffee beans%n" +
+                "%d disposable cups%n" +
+                "$%d of money%n",getWater(),getMilk(),getBeans(),getDispoCups(),getMoney());
+    }
+
+    public void actionBuy() {
+        //possible use of ENUM(field,...) for coffee, e.g. 1 - espresso, 2 - latte, 3 - cappuccino
+        Scanner inputBuy = new Scanner(System.in);
+        System.out.println();
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:");
+        String input= inputBuy.next();
+
+        switch (input) {
+            case "1":{
+                if (water >= 250 && beans >= 16 && dispoCups >=1) {
+                    System.out.println("I have enough resources, making you a coffee!");
+                    setWater(water - 250);
+                    setBeans(beans - 16);
+                    setDispoCups(dispoCups -1);
+                    setMoney(money + 4);
+                } else {
+                    String ingredient = water < 250 ? "water" : beans < 16 ? "coffee beans" : "disposable cups";
+                    System.out.printf("Sorry, not enough %s!%n",ingredient);
+                }
+                break;
+            }
+            case "2": {
+                if (water >= 350 && milk >=75 && beans >= 20 && dispoCups >=1) {
+                    System.out.println("I have enough resources, making you a coffee!");
+                    setWater(water - 350);
+                    setMilk(milk - 75);
+                    setBeans(beans - 20);
+                    setDispoCups(dispoCups -1);
+                    setMoney(money + 7);
+                } else {
+                    String ingredient = water < 250 ? "water" : milk < 75 ? "milk" :
+                                        beans < 20 ? "coffee beans" : "disposable cups";
+                    System.out.printf("Sorry, not enough %s!%n",ingredient);
+                }
+                break;
+            }
+            case "3": {
+                if (water >= 200 && milk >=100 && beans >= 12 && dispoCups >=1) {
+                    System.out.println("I have enough resources, making you a coffee!");
+                    setWater(water - 200);
+                    setMilk(milk - 100);
+                    setBeans(beans - 12);
+                    setDispoCups(dispoCups -1);
+                    setMoney(money + 6);
+                } else {
+                    String ingredient = water < 200 ? "water" : milk < 100 ? "milk" :
+                            beans < 12 ? "coffee beans" : "disposable cups";
+                    System.out.printf("Sorry, not enough %s!%n",ingredient);
+                }
+                break;
+            }
+            case "back": {
+                break;
+            }
+        }
+    }
+
+    public void actionFill() {
+        Scanner inputFill = new Scanner(System.in);
+        System.out.println();
+        System.out.println("Write how many ml of water you want to add:");
+        setWater(water + inputFill.nextInt());
+        System.out.println("Write how many ml of milk you want to add:");
+        setMilk(milk + inputFill.nextInt());
+        System.out.println("Write how many grams of coffee beans you want to add:");
+        setBeans(beans + inputFill.nextInt());
+        System.out.println("Write how many disposable cups you want to add:");
+        setDispoCups(dispoCups + inputFill.nextInt());
+
+    }
+
+    public void actionTake() {
+        int amount = getMoney();
+        System.out.println();
+        System.out.printf("I gave you $%d%n",amount);
+        setMoney(0);
+    }
+
+    public static void main(String[] args) {
+        CoffeeMachine machine = new CoffeeMachine(400, 540, 120, 9, 550);
+        Scanner scanner = new Scanner(System.in);
+        String action;
+        do {
+            System.out.println();
+            System.out.println("Write action (buy, fill, take, remaining, exit):");
+            action = scanner.nextLine();
+
+            switch (action) {
+                case "buy": {
+                    machine.actionBuy();
+                    break;
+                }
+                case "fill": {
+                    machine.actionFill();
+                    break;
+                }
+                case "take": {
+                    machine.actionTake();
+                    break;
+                }
+                case "remaining": {
+                    machine.coffeeMachineActual();
+                    break;
+                }
+            }
+        } while (!"exit".equals(action));
+
+        scanner.close();
+    }
+}

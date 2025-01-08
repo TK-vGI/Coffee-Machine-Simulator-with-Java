@@ -1,0 +1,26 @@
+type: edu
+files:
+  - name: src/machine/CoffeeMachine.java
+    visible: true
+    learner_created: false
+  - name: test/CoffeeMachineTest.java
+    visible: false
+    learner_created: false
+  - name: src/machine/coffee.machine 3of6.txt
+    visible: true
+    learner_created: true
+  - name: src/machine/coffee.machine 4of6.txt
+    visible: true
+    learner_created: true
+  - name: src/machine/coffee.machine 6of6.txt
+    visible: true
+    learner_created: true
+  - name: src/machine/coffee.machine 5of6.txt
+    visible: true
+    learner_created: true
+feedback_link: https://hyperskill.org/learn/step/5332#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Mon, 06 Jan 2025 17:53:16 UTC"
+record: 4
